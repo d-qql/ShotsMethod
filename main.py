@@ -9,26 +9,26 @@ from rk_solver import RKSolver, SolverParams
 
 def shot():
     """
-    y'' + p(x)y' + q(x)y + f(x) = 0
+    y'' = f(x, y, z); z = y'
     """
 
-    # Указать функцию p(x)
-    def p(x):
-        return 0
+    # # Указать функцию p(x)
+    # def p(x):
+    #     return 0
+    #
+    # # Указать функцию q(x)
+    #
+    # def q(x):
+    #     return -1
 
-    # Указать функцию q(x)
+    # Указать функцию f(x, y, z)
 
-    def q(x):
-        return -1
-
-    # Указать функцию f(x)
-
-    def f(x):
-        return 0
+    def f(x, y, z):
+        return y
 
     # Не знаешь - не трогай(даже если знаешь - не трогай)
     def F(x, y):
-        return np.array([y[1], -p(x) * y[1] - q(x) * y[0] - f(x)])
+        return np.array([y[1], f(x, y[0], y[1])])
 
     # Используем метод трапеций Рунге-Кутты
     matrix = np.array([[1. / 2, 0], [0, 1. / 2]])
