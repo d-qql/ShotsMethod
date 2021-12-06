@@ -26,7 +26,7 @@ def shot():
     def f(x):
         return 0
 
-    # Не знаешь - не трогай
+    # Не знаешь - не трогай(даже если знаешь - не трогай)
     def F(x, y):
         return np.array([y[1], -p(x) * y[1] - q(x) * y[0] - f(x)])
 
@@ -68,18 +68,18 @@ def shot():
         referenceValue = fixed_Y
 
     if (VariateDerivative):
-        ixes, res = solver.solve(F, x1, x2, np.array([fixed_Y, initialVariate]), params)
+        ixes, res = solver.solve(F, start, end, np.array([fixed_Y, initialVariate]), params)
     else:
-        ixes, res = solver.solve(F, x1, x2, np.array([initialVariate, fixed_dY]), params)
+        ixes, res = solver.solve(F, start, end, np.array([initialVariate, fixed_dY]), params)
     firstSign = res[-1][int(VariateDerivative)] - referenceValue > 0
     currentSign = firstSign
     currentVariate = initialVariate
     while currentSign == firstSign:
         currentVariate += variateStep
         if (VariateDerivative):
-            ixes, res = solver.solve(F, x1, x2, np.array([fixed_Y, currentVariate]), params)
+            ixes, res = solver.solve(F, start, end, np.array([fixed_Y, currentVariate]), params)
         else:
-            ixes, res = solver.solve(F, x1, x2, np.array([currentVariate, fixed_dY]), params)
+            ixes, res = solver.solve(F, start, end, np.array([currentVariate, fixed_dY]), params)
         currentSign = res[-1][int(VariateDerivative)] - referenceValue > 0
 
     if (initialVariate < currentVariate):
@@ -95,9 +95,9 @@ def shot():
         print(res[-1][int(VariateDerivative)])
         currentVariate = (rightVariate - leftVariate) / 2.
         if (VariateDerivative):
-            ixes, res = solver.solve(F, x1, x2, np.array([fixed_Y, currentVariate]), params)
+            ixes, res = solver.solve(F, start, end, np.array([fixed_Y, currentVariate]), params)
         else:
-            ixes, res = solver.solve(F, x1, x2, np.array([currentVariate, fixed_dY]), params)
+            ixes, res = solver.solve(F, start, end, np.array([currentVariate, fixed_dY]), params)
         currentSign = res[-1][int(VariateDerivative)] - referenceValue > 0
         if currentSign != leftSign:
             leftVariate = leftVariate
