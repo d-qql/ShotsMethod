@@ -1,3 +1,4 @@
+import math
 from unittest import TestCase
 import numpy as np
 
@@ -24,7 +25,7 @@ def shot():
     # Указать функцию f(x, y, z)
 
     def f(x, y, z):
-        return y
+        return x + math.cos(math.sqrt(x)) / 100.
 
     # Не знаешь - не трогай(даже если знаешь - не трогай)
     def F(x, y):
@@ -41,12 +42,12 @@ def shot():
 
     # Укажи граничное условие на y(x1) и на y'(x2)
     fixed_Y = 1
-    x1 = 0
+    x1 = 1
     fixed_dY = 2
-    x2 = 1
+    x2 = 0
 
     # Укажи начальную вариацию параметра, заданного на правой границе (если не сходится - измени его)
-    initialVariate = 0
+    initialVariate = -1.5
 
     # Укажи шаг изменения вариации (малый шаг - долго работает)
     variateStep = 0.001
@@ -109,9 +110,13 @@ def shot():
             rightVariate = rightVariate
             leftSign = currentSign
             rightSign = rightSign
-    print(ixes)
-    print(res)
-
+    # print(ixes)
+    # print(res)
+    print("https://github.com/d-qql/ShotsMethod")
+    print("Начальное приближение вариации отбрасыванием косинуса получено аналитически = -7/6, округлено до -1.5")
+    print("x  |             y          |             y'             |")
+    for i in range(len(ixes)):
+        print(ixes[i], res[i][0], res[i][1])
 
 if __name__ == "__main__":
     shot()
