@@ -76,7 +76,7 @@ def shot():
     while abs(res[-1][0] - referenceValue) > variateTol:
         print("var: ", currentVariate)
         print(res[-1][0])
-        currentVariate = (rightVariate - leftVariate) / 2.
+        currentVariate = (rightVariate + leftVariate) / 2.
         ixes, res = solver.solve(F, x1, x2, np.array([fixed_Y1, currentVariate]), params)
         currentSign = res[-1][0] - referenceValue > 0
         if currentSign != leftSign:
